@@ -1,0 +1,109 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqfqqq0b2j43q"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_uj6sw"]
+[ext_resource type="PackedScene" uid="uid://bbpa3q11vtt3x" path="res://pitch_control_container.tscn" id="2_6oua6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kopt"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.141559, 0.141559, 0.141559, 1)
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_rvbf0"]
+
+[node name="Main" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_uj6sw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="CutoutSpacer" type="ColorRect" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MenuButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/icon_max_width = 64
+text = "MENU"
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="RecordButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/icon_max_width = 64
+text = "RECORD"
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="EditorButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/icon_max_width = 64
+text = "EDITOR"
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="LoopButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/icon_max_width = 64
+toggle_mode = true
+text = "LOOP"
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="EffectsButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/icon_max_width = 64
+text = "EFFECTS"
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="SceneButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/icon_max_width = 64
+text = "SCENE"
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5kopt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PitchControlContainer" parent="VBoxContainer/PanelContainer/VBoxContainer" instance=ExtResource("2_6oua6")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PadContainer" type="GridContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+columns = 3
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamPolyphonic_rvbf0")
+autoplay = true

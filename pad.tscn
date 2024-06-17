@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://cfyt786urdwkj"]
+
+[ext_resource type="Script" path="res://pad.gd" id="1_qy16y"]
+
+[sub_resource type="Gradient" id="Gradient_ec2tw"]
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0.25, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.8, 0.8, 0.8, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6rq4c"]
+gradient = SubResource("Gradient_ec2tw")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0.1)
+
+[sub_resource type="Gradient" id="Gradient_bdty3"]
+interpolation_color_space = 2
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jcujq"]
+gradient = SubResource("Gradient_bdty3")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0.1)
+
+[node name="Pad" type="AspectRatioContainer" groups=["pad"]]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+stretch_mode = 0
+script = ExtResource("1_qy16y")
+
+[node name="Sprites" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Sprites"]
+unique_name_in_owner = true
+texture_normal = SubResource("GradientTexture2D_6rq4c")
+
+[node name="Overlay" type="Sprite2D" parent="Sprites"]
+unique_name_in_owner = true
+texture = SubResource("GradientTexture2D_jcujq")
+centered = false

@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbpa3q11vtt3x"]
+
+[ext_resource type="Script" path="res://pitch_control_container.gd" id="1_p0a7o"]
+[ext_resource type="Script" path="res://pitch_control.gd" id="1_sqskl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_77obj"]
+
+[node name="PitchControlContainer" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_77obj")
+script = ExtResource("1_p0a7o")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PitchControl" type="Control" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_sqskl")
+
+[node name="PitchHoldButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(128, 96)
+layout_mode = 2
+toggle_mode = true
+text = "HOLD"
+
+[connection signal="toggled" from="HBoxContainer/PitchHoldButton" to="HBoxContainer/PitchControl" method="_on_pitch_hold_button_toggled"]
