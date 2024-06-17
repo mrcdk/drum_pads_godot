@@ -13,7 +13,7 @@ signal value_changed(new_value)
 
 var hold_enabled = false
 
-var dragging = false
+var touch_idx = -1
 
 func _draw() -> void:
 	var middle = ceil(size.x / 2.0)
@@ -28,14 +28,19 @@ func _draw() -> void:
 
 
 func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		dragging = event.pressed
-		value = remap(event.position.x, 0, size.x, -100, 100)
-		if not event.pressed and not hold_enabled:
-			value = 0
+	if event is InputEventScreenTouch:
+		if touch_idx < 0:
+			touch_idx = event.index
+		if touch_idx == event.index:
+			value = remap(event.position.x, 0, size.x, -100, 100)
+			if not event.pressed:
+				touch_idx = -1
+				if not hold_enabled:
+					value = 0
 
-	if dragging and event is InputEventMouseMotion:
-		value = remap(event.position.x, 0, size.x, -100, 100)
+	if event is InputEventScreenDrag:
+		if touch_idx == event.index:
+			value = remap(event.position.x, 0, size.x, -100, 100)
 
 
 
